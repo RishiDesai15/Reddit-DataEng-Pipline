@@ -39,3 +39,65 @@ The pipeline automates the ingestion of Reddit data, transforms raw JSON into an
 
 ## Architecture
 
+Reddit API
+↓
+Apache Airflow (DAGs)
+↓
+Amazon S3 (Raw Data)
+↓
+AWS Glue (Transform & Catalog)
+↓
+Amazon Athena
+↓
+Amazon Redshift (Analytics)
+
+---
+
+## Pipeline Workflow
+
+1. **Extract**
+   - Fetch Reddit data via API using Airflow DAGs
+
+2. **Transform**
+   - Clean and normalize raw JSON data
+   - Apply schema transformations using AWS Glue
+
+3. **Load**
+   - Store processed data in S3
+   - Load analytics-ready data into Redshift
+
+4. **Analyze**
+   - Query data using Athena and Redshift
+
+---
+
+## Project Structure
+
+reddit-etl-pipeline/
+│
+├── dags/ # Airflow DAGs
+├── scripts/ # Extraction and transformation scripts
+├── glue_jobs/ # AWS Glue ETL scripts
+├── sql/ # Athena and Redshift queries
+├── docker-compose.yml # Airflow and Celery setup
+├── requirements.txt # Python dependencies
+└── README.md
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.9+
+- Docker & Docker Compose
+- AWS account
+- Reddit API credentials
+
+---
+
+### Clone Repository
+
+```bash
+git clone https://github.com/your-username/reddit-etl-pipeline.git
+cd reddit-etl-pipeline
